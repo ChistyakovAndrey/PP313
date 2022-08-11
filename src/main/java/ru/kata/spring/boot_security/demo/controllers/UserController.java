@@ -24,14 +24,17 @@ public class UserController {
         this.userService = userService;
         this.roleService = roleService;
     }
+
     @GetMapping("/profile")
-    public String userProfile(@RequestParam("id") Integer id, Model model, Principal principal){
+    public String userProfile(@RequestParam(value = "id", required = false) Integer id, Model model, Principal principal) {
         User currentUser = userService.findByName(principal.getName());
-        User user = userService.findByID(id);
-        if(currentUser.isAdmin() || Objects.equals(currentUser.getId(), user.getId())){
+        if (currentUser.isAdmin()) {
+            User user = userService.findByID(id);
             model.addAttribute("user", user);
             return "/user/profile";
+        } else {
+            model.addAttribute("user", currentUser);
+            return "/user/profile";
         }
-        return null;
     }
 }
