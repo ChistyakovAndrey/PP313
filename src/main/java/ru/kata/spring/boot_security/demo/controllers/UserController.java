@@ -18,12 +18,10 @@ import java.security.Principal;
 @RequestMapping("/user")
 public class UserController {
     private UserService userService;
-    private RoleService roleService;
 
     @Autowired
-    public UserController(UserServiceImpl userService, RoleServiceImpl roleService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
-        this.roleService = roleService;
     }
 
     @GetMapping("/profile")
