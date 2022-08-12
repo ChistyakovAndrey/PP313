@@ -22,8 +22,8 @@ public class User implements UserDetails {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public User() {
@@ -122,8 +122,9 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    public boolean isAdmin(){
-        if(roles != null){
+
+    public boolean isAdmin() {
+        if (roles != null) {
             return roles.toString().contains("ADMIN");
         }
         return false;

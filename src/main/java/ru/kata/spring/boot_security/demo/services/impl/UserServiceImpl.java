@@ -6,11 +6,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,8 +35,22 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void saveUser(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
+    public void saveUser(User user, boolean isAdmin) {
+        Role roleAdmin = new Role("ROLE_ADMIN");
+        Role roleUser = new Role("ROLE_USER");
+        roleAdmin.setId(1);
+        roleUser.setId(2);
+        if(user.getRoles() == null){
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleUser);
+            if(isAdmin){
+                roles.add(roleAdmin);
+            }
+            user.setRoles(roles);
+        }
+        if(user.getPassword().length() < 20){
+            user.setPassword(encoder.encode(user.getPassword()));
+        }
         userRepository.save(user);
     }
 

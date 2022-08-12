@@ -7,17 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.services.RoleService;
+import ru.kata.spring.boot_security.demo.services.UserService;
 import ru.kata.spring.boot_security.demo.services.impl.RoleServiceImpl;
 import ru.kata.spring.boot_security.demo.services.impl.UserServiceImpl;
 
 import java.security.Principal;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    private UserServiceImpl userService;
-    private RoleServiceImpl roleService;
+    private UserService userService;
+    private RoleService roleService;
 
     @Autowired
     public UserController(UserServiceImpl userService, RoleServiceImpl roleService) {

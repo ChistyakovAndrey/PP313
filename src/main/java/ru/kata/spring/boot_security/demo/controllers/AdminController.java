@@ -7,21 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.services.RoleService;
+import ru.kata.spring.boot_security.demo.services.UserService;
 import ru.kata.spring.boot_security.demo.services.impl.RoleServiceImpl;
 import ru.kata.spring.boot_security.demo.services.impl.UserServiceImpl;
 
-import java.security.Principal;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    private UserServiceImpl userService;
-    private RoleServiceImpl roleService;
+    private UserService userService;
+    private RoleService roleService;
 
     @Autowired
     public AdminController(UserServiceImpl userService, RoleServiceImpl roleService) {
@@ -56,19 +54,7 @@ public class AdminController {
     @GetMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user, @RequestParam(value = "admin", required = false)
     boolean isAdmin) {
-        Role roleAdmin = new Role("ROLE_ADMIN");
-        Role roleUser = new Role("ROLE_USER");
-        roleAdmin.setId(1);
-        roleUser.setId(2);
-        if(user.getRoles() == null){
-            Set<Role> roles = new HashSet<>();
-            roles.add(roleUser);
-            if(isAdmin){
-                roles.add(roleAdmin);
-            }
-            user.setRoles(roles);
-        }
-        userService.saveUser(user);
+        userService.saveUser(user, isAdmin);
         return "redirect:/admin/all_users";
     }
     @GetMapping("/delete")
