@@ -1,0 +1,37 @@
+<div th:fragment="all_users" class="admin-page-content-wrapper">
+    <span id="about-user-table-header">All users</span>
+    <div class="all-users-table-wrapper">
+        <table style="width: 100%">
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <th:block th:each="user : ${userList}">
+                <tr style="background: #eee">
+                    <td th:text="${user.getId()}"></td>
+                    <td th:text="${user.getName()}"></td>
+                    <td th:text="${user.getSurname()}"></td>
+                    <td th:text="${user.getAge()}"></td>
+                    <td th:text="${user.getEmail()}"></td>
+                    <td th:text="${user.rolesToString()}"></td>
+                    <td>
+                        <button type="button" class="btn btn-info"
+                                data-toggle="modal" th:data-target="${'#_' + user.getId()}">Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger"
+                                data-toggle="modal" th:data-target="${'#del_' + user.getId()}">Delete
+                        </button>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</div>

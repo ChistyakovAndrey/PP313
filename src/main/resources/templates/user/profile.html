@@ -1,16 +1,58 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Spring Security Example</title>
-</head>
+<html lang="en">
+<head th:replace="static/inc/head :: head"></head>
 <body>
-<h1>Страница пользователя <span th:text="${user.getName()}"></span></h1>
-<h4>Имя: <span th:text="${user.getName()}"></span></h4>
-<h4>Фамилия: <span th:text="${user.getSurname()}"></span></h4>
-<h4>Возраст: <span th:text="${user.getAge()}"></span></h4>
-<h4>Email: <span th:text="${user.getEmail()}"></span></h4>
-<a href="/logout">exit</a>
+<style th:insert="static/lib/css/main.css"></style>
+<div class="container-fluid">
+    <div th:replace="static/inc/top_info_div :: top_info_div"></div>
+    <div class="row no-gutters main-row">
+        <div class="col-md-2 sidebar">
+            <button th:onclick="@{window.location.href='/admin/all_users'}" th:if="${currentUser.isAdmin()}" type="button" class="btn btn-primary btn-lg admin-sidebar-btn-user-page"
+                    onclick="window.location.href='/admin/all_users'">Admin
+            </button>
+            <button type="button" class="btn btn-primary btn-lg user-sidebar-btn-user-page"
+                    onclick="window.location.href='/user/profile'">User
+            </button>
+        </div>
+        <div class="col-md-10 main-content">
+            <h1>User information-page</h1>
+            <div class="admin-page-content-wrapper">
+                <span id="about-user-table-header">About user</span>
+                <div class="all-users-table-wrapper">
+                    <table style="width: 100%">
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Age</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
 
+                        <tr style="background: #eee">
+                            <td th:text="${currentUser.getId()}"></td>
+                            <td th:text="${user.getName()}"></td>
+                            <td th:text="${user.getSurname()}"></td>
+                            <td th:text="${user.getAge()}"></td>
+                            <td th:text="${user.getEmail()}"></td>
+                            <td th:text="${user.rolesToString()}"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer th:replace="static/inc/footer :: footer"></footer>
+</div>
+<script>
+    $(document).ready(function ($) {
 
+        WIDTH = $(window).width();
+        HEIGHT = $(window).height();
+
+        $('.main-row').css("height", HEIGHT - $('.top_info_div').height() + "px");
+
+    });
+</script>
 </body>
 </html>

@@ -25,14 +25,23 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String userProfile(@RequestParam(value = "id", required = false) Integer id, Model model, Principal principal) {
+    public String userProfile(@RequestParam(value = "id", required = false) Integer id, Model model,
+                              Model model2, Principal principal) {
         User currentUser = userService.findByName(principal.getName());
         if (currentUser.isAdmin()) {
+            if(id == null){
+                User user = userService.findByName(principal.getName());
+                model.addAttribute("user", user);
+                model2.addAttribute("currentUser", user);
+                return "/user/profile";
+            }
             User user = userService.findByID(id);
             model.addAttribute("user", user);
+            model2.addAttribute("currentUser", user);
             return "/user/profile";
         } else {
             model.addAttribute("user", currentUser);
+            model2.addAttribute("currentUser", currentUser);
             return "/user/profile";
         }
     }

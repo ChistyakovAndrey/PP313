@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -81,6 +82,16 @@ public class User implements UserDetails {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+    public String rolesToString(){
+        StringBuilder roles = new StringBuilder();
+        if(this.roles.toString().contains("ADMIN")){
+            roles.append("ADMIN ");
+        }
+        if(this.roles.toString().contains("USER")){
+            roles.append("USER ");
+        }
+        return roles.toString().trim();
     }
 
     public User setRoles(Set<Role> roles) {

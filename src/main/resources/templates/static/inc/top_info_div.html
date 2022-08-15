@@ -1,0 +1,11 @@
+<div class="top_info_div" th:fragment="top_info_div">
+    <span class="top_div_current_user_info">
+        <span th:text="${currentUser.getEmail()}"></span>
+        <span style="font-weight: normal"> with roles: </span>
+        <span style="font-weight: normal" th:text="${currentUser.rolesToString()}"></span>
+    </span>
+<!--    <a class="top_logout" href="/logout">Logout</a>-->
+    <form class="top_logout" th:action="@{/logout}" method="post">
+        <button type="submit" class="top_logout_btn"><span class="top_logout">Logout</span></button>
+    </form>
+</div>

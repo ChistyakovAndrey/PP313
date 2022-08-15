@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title class="title"></title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="shortcut icon" href="static/img/favicon.ico" type="image/png">
+    <!--    <link rel="stylesheet" type="text/css" href="/src/main/resources/templates/static/lib/css/main.css">-->
+    <script src="static/lib/js/main.js"></script>
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" method="post" action="/login">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <p>
+            <label for="mail" class="sr-only">Email</label>
+            <input type="text" id="mail" name="email" class="form-control" placeholder="Email" required autofocus>
+        </p>
+        <p>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </p>
+        <input name="_csrf" type="hidden" value="e3d64e50-1197-4c4a-99f7-47565ac4ff06" />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,68 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="static/inc/head :: head"></head>
 <body>
-<style>
-    th, td {
-        color: #736F6F;
-        padding: 7px 15px;
-        border: 1px solid #C6C3C3;
-        font-size: 22px;
-    }
-    tr:hover{
-        background: #eee;
-    }
-    .hoverNot:hover{
-        background: transparent !important;
-    }
+<style th:insert="static/lib/css/main.css"></style>
+<div class="container-fluid">
+    <div th:replace="static/inc/top_info_div :: top_info_div"></div>
+    <div class="row no-gutters main-row">
+        <div class="col-md-2 sidebar">
+            <button type="button" class="btn btn-primary btn-lg admin-sidebar-btn-admin-page"
+                    onclick="window.location.href='/admin/all_users'">Admin
+            </button>
+            <button type="button" class="btn btn-primary btn-lg user-sidebar-btn-admin-page"
+                    onclick="window.location.href='/user/profile'">User
+            </button>
+        </div>
+        <div class="col-md-10 main-content">
+            <h1>Admin panel</h1>
+            <div class="top-toggle-buttons">
+                <span id="users-table-btn">Users table</span>
+                <span id="add-new-user-btn">New user</span>
+            </div>
+            <div class="content-wrapper">
+                <div th:replace="static/inc/all_users :: all_users"></div>
+                <div th:replace="static/inc/add_new_user :: add_new_user"></div>
+            </div>
 
-    table {
-        margin: 50px auto;
-        border-collapse: collapse;
-    }
+        </div>
+    </div>
+    <footer th:replace="static/inc/footer :: footer"></footer>
+</div>
+<th:block th:each="user : ${userList}">
+    <div th:replace="static/inc/modal-update :: modal-update"></div>
+    <div th:replace="static/inc/modal-delete :: modal-delete"></div>
+</th:block>
+<script>
+    $(document).ready(function ($) {
+        WIDTH = $(window).width();
+        HEIGHT = $(window).height();
 
-    a {
-        font-size: 16px;
-    }
-</style>
-<table>
-    <tr class="hoverNot">
-        <th>#</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Age</th>
-        <th>Mail</th>
-        <th>Role</th>
-        <th colspan="3">Operations</th>
-    </tr>
+        $('.main-row').css("height", HEIGHT - $('.top_info_div').height() + "px");
+        $('#add-new-user-btn').click(function () {
+            $(this).css({"color": "#000", "background": "#fff", "border-color": "#D5D1D1"});
+            $('#users-table-btn').css({"color": "#007bff", "background": "transparent", "border-color": "transparent"});
+            $('.admin-page-content-wrapper').css("display", "none");
+            $('.add-new-user-content-wrapper').css("display", "block");
+        })
+        $('#users-table-btn').click(function () {
+            $(this).css({"color": "#000", "background": "#fff", "border-color": "#D5D1D1"});
+            $('#add-new-user-btn').css({
+                "color": "#007bff",
+                "background": "transparent",
+                "border-color": "transparent"
+            });
+            $('.admin-page-content-wrapper').css("display", "block");
+            $('.add-new-user-content-wrapper').css("display", "none");
+        })
 
-    <th:block th:each="user : ${userList}">
-        <tr>
-            <td th:text="${user.getId()}"></td>
-            <td th:text="${user.getName()}"></td>
-            <td th:text="${user.getSurname()}"></td>
-            <td th:text="${user.getAge()}"></td>
-            <td th:text="${user.getEmail()}"></td>
-            <td th:text="${user.getRoles()}"></td>
-            <td>
-                <a href="/admin/user_info" th:href="@{/admin/user_info(id=${user.getId()})}">update</a>
-            </td>
-            <td>
-                <a href="/admin/delete" th:href="@{/admin/delete(id=${user.getId()})}">delete</a>
-            </td>
-            <td>
-                <a href="/user/profile" th:href="@{/user/profile(id=${user.getId()})}">profile</a>
-            </td>
-        </tr>
-    </th:block>
-    <tr class="hoverNot" style="text-align: left; border: 1px solid transparent">
-        <td colspan="8">
-            <input type="button" value="add user" onclick="window.location.href='/admin/add'"></td>
-        <td><a href="/logout">exit</a></td>
-    </tr>
-</table>
+    });
+</script>
 </body>
 </html>

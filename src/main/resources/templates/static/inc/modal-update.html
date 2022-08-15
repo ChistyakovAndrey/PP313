@@ -1,0 +1,42 @@
+<!-- Modal -->
+<div th:fragment="modal-update" class="modal fade" th:id="${'_' + user.getId()}" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form class="update-form" action="updateUser" th:modelAttribute="user">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit user</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input id="id" type="hidden" th:value="${user.getId()}" name="id">
+                    <span class="label-span-for-del-form">ID</span>
+                    <div class="id-div-in-form" th:text="${user.id}"></div>
+                    <label for="name">First name</label>
+                    <input id="name" type="text" th:value="${user.name}" name="name"><br>
+                    <label for="surname">Last name</label>
+                    <input id="surname" type="text" th:value="${user.surname}" name="surname"><br>
+                    <label for="age">Age</label>
+                    <input id="age" type="number" th:value="${user.age}" name="age"><br>
+                    <label for="email">Email</label>
+                    <input id="email" type="text" th:value="${user.email}" name="email"><br>
+                    <label for="pass">Password</label>
+                    <input id="pass" type="text" name="password"><br>
+                    <label for="roles">Role</label>
+                    <select th:name="${'roles1'}" id="roles" size="2">
+                        <!--                        <select class="roles-select" id="roles">-->
+                        <option th:selected="${user.isAdmin()}" value="admin">Admin</option>
+                        <option th:selected="${!user.isAdmin()}" value="user">User</option>
+                    </select>
+                    <p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-edit2" data-dismiss="modal">Close</button>
+                    <button type="button submit" class="btn btn-primary btn-edit">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

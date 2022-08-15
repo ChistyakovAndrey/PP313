@@ -1,0 +1,40 @@
+<!-- Modal -->
+<div th:fragment="modal-delete" class="modal fade" th:id="${'del_' + user.getId()}" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form class="update-form" action="delete" th:modelAttribute="user">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Delete user</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input id="id" type="hidden" th:value="${user.getId()}" name="id">
+                    <span class="label-span-for-del-form">ID</span>
+                    <div class="id-div-in-form" th:text="${user.id}"></div>
+                    <span class="label-span-for-del-form">First name</span>
+                    <div class="id-div-in-form" th:text="${user.name}"></div>
+                    <span class="label-span-for-del-form">Last name</span>
+                    <div class="id-div-in-form" th:text="${user.surname}"></div>
+                    <span class="label-span-for-del-form">Age</span>
+                    <div class="id-div-in-form" th:text="${user.age}"></div>
+                    <span class="label-span-for-del-form">Email</span>
+                    <div class="id-div-in-form" th:text="${user.email}"></div>
+                    <label for="roles">Role</label>
+                    <select th:name="${'roles1'}" id="roles" size="2">
+                        <!--                        <select class="roles-select" id="roles">-->
+                        <option th:selected="${user.isAdmin()}" value="admin">Admin</option>
+                        <option th:selected="${!user.isAdmin()}" value="user">User</option>
+                    </select>
+                    <p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-edit2" data-dismiss="modal">Close</button>
+                    <button type="button submit" class="btn btn-danger btn-edit">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

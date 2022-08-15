@@ -1,0 +1,215 @@
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+a {
+    font-size: 16px;
+}
+
+.top_info_div {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    padding: 0px 30px;
+    background: #39393F;
+}
+
+.top_div_current_user_info {
+    position: relative;
+    top: 13px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 20px;
+}
+
+.top_logout {
+    position: absolute;
+    right: 30px;
+    top: 7px;
+    color: #989494;
+    font-size: 20px;
+    transition-property: color;
+    transition-duration: 0.2s;
+}
+
+.top_logout:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.main-row {
+    background: #eee;
+    padding-top: 20px;
+}
+
+.admin-sidebar-btn-admin-page, .user-sidebar-btn-admin-page, .admin-sidebar-btn-user-page, .user-sidebar-btn-user-page {
+    width: 100%;
+    text-align: left;
+}
+
+.sidebar {
+    background: #fff;
+}
+
+.top_logout_btn {
+    background: rgba(0, 0, 0, 0);
+    width: 0;
+    height: 0;
+    border: 0 solid #eee;
+    padding: 0;
+}
+
+.top_logout_btn:hover {
+    background: transparent;
+}
+
+.user-sidebar-btn-admin-page, .admin-sidebar-btn-user-page {
+    background: #fff;
+    color: #007bff;
+    border-color: #fff;
+    transition-property: background;
+    transition-duration: 0.2s;
+}
+
+.user-sidebar-btn-admin-page:hover, .admin-sidebar-btn-user-page:hover {
+    background: #F8F4F4;
+    color: #007bff;
+    border-color: #F8F4F4;
+}
+
+.main-content {
+    padding: 0 30px !important;
+}
+
+.content-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.admin-page-content-wrapper, .add-new-user-content-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #eee;
+    border: 1px solid #D5D1D1;
+    border-radius: 5px;
+}
+
+.add-new-user-content-wrapper {
+    display: none;
+}
+
+#about-user-table-header {
+    display: block;
+    margin: 10px 20px;
+    font-size: 24px;
+}
+
+.all-users-table-wrapper {
+    width: 100%;
+    border-top: 1px solid #D5D1D1;
+    padding: 10px 20px;
+    background: #fff;
+}
+
+table th {
+    color: #000;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 7px 15px;
+    border-top: 1px solid #D5D1D1;
+    font-size: 22px;
+}
+
+.update-form {
+    width: 100%;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.update-form input, .id-div-in-form {
+    width: 65%;
+    margin: 0px auto 12px;
+    padding: 5px;
+    border: 1px solid #D5D1D1;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.id-div-in-form {
+    background: #eee;
+}
+
+.label-span-for-del-form {
+    display: inline-block;
+    width: 65%;
+    margin: 0px auto;
+    padding: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.new-user-form {
+    width: 450px;
+    text-align: center;
+    margin: 0px auto;
+}
+
+.new-user-form input, #new-roles, #roles {
+    width: 70%;
+    margin: 0px auto 12px;
+    padding: 5px;
+    border: 1px solid #D5D1D1;
+    border-radius: 5px;
+}
+
+/*#new-roles{*/
+/*    width:70%;*/
+/*    margin: 0px auto 12px;*/
+/*    padding: 5px;*/
+/*    border: 1px solid #D5D1D1;*/
+/*    border-radius: 5px;*/
+/*}*/
+label {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.top-toggle-buttons span {
+    position: relative;
+    top: 20px;
+    height: 49px;
+    padding: 10px 20px;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.top-toggle-buttons {
+    height: 58px;
+    margin-top: 20px;
+}
+
+#add-new-user-btn {
+    color: #007bff;
+    left: -5px;
+    border: 1px solid transparent;
+    border-radius: 5px 5px 0 0;
+}
+
+#users-table-btn {
+    background: #fff;
+    border: 1px solid #D5D1D1;
+    border-radius: 5px 5px 0 0;
+}

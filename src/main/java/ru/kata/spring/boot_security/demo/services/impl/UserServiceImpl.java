@@ -13,12 +13,13 @@ import ru.kata.spring.boot_security.demo.services.UserService;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
-    BCryptPasswordEncoder encoder;
+    private BCryptPasswordEncoder encoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder encoder) {
@@ -40,17 +41,50 @@ public class UserServiceImpl implements UserService {
         Role roleUser = new Role("ROLE_USER");
         roleAdmin.setId(1);
         roleUser.setId(2);
-        if(user.getRoles() == null){
-            Set<Role> roles = new HashSet<>();
-            roles.add(roleUser);
-            if(isAdmin){
-                roles.add(roleAdmin);
-            }
-            user.setRoles(roles);
+        Set<Role> roles = new HashSet<>();
+//        if(user.getRoles() == null){
+//            Set<Role> roles = new HashSet<>();
+//            roles.add(roleUser);
+//            if(isAdmin){
+//                roles.add(roleAdmin);
+//            }
+//            user.setRoles(roles);
+//        }
+        if(isAdmin){
+            roles.add(roleAdmin);
         }
-        if(user.getPassword().length() < 20){
+        else{
+            roles.add(roleUser);
+        }
+        user.setRoles(roles);
+        //if(user.getPassword().length() < 20){
+            user.setPassword(encoder.encode(user.getPassword()));
+        //}
+        userRepository.save(user);
+    }
+
+    @Transactional
+    @Override
+    public void updateUser(User user, String admin) {
+        Role roleAdmin = new Role("ROLE_ADMIN");
+        Role roleUser = new Role("ROLE_USER");
+        roleAdmin.setId(1);
+        roleUser.setId(2);
+        boolean isAdmin = Objects.equals(admin, "admin");
+        if(user.getPassword().isEmpty()){
+            user.setPassword(findByID(user.getId()).getPassword());
+        }
+        else{
             user.setPassword(encoder.encode(user.getPassword()));
         }
+        Set<Role> roles = new HashSet<>();
+        if(isAdmin){
+            roles.add(roleAdmin);
+        }
+        else{
+            roles.add(roleUser);
+        }
+        user.setRoles(roles);
         userRepository.save(user);
     }
 
@@ -70,6 +104,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByName(String name) {
         return userRepository.findByName(name);
+    }
+
+    @Override
+    public User findByEmail(String mail) {
+        return userRepository.findByEmail(mail);
     }
 
     @Override
