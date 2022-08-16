@@ -7,7 +7,8 @@
     <div th:replace="static/inc/top_info_div :: top_info_div"></div>
     <div class="row no-gutters main-row">
         <div class="col-md-2 sidebar">
-            <button th:onclick="@{window.location.href='/admin/all_users'}" th:if="${currentUser.isAdmin()}" type="button" class="btn btn-primary btn-lg admin-sidebar-btn-user-page"
+            <button th:onclick="@{window.location.href='/admin/all_users'}"
+                    th:if="${currentUser.isAdmin()}" type="button" class="btn btn-primary btn-lg admin-sidebar-btn-user-page"
                     onclick="window.location.href='/admin/all_users'">Admin
             </button>
             <button type="button" class="btn btn-primary btn-lg user-sidebar-btn-user-page"
@@ -16,7 +17,7 @@
         </div>
         <div class="col-md-10 main-content">
             <h1>User information-page</h1>
-            <div class="admin-page-content-wrapper">
+            <div class="user-page-content-wrapper">
                 <span id="about-user-table-header">About user</span>
                 <div class="all-users-table-wrapper">
                     <table style="width: 100%">

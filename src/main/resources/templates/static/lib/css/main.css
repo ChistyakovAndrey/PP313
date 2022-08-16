@@ -102,6 +102,12 @@ a {
     border: 1px solid #D5D1D1;
     border-radius: 5px;
 }
+.user-page-content-wrapper{
+    width: 100%;
+    background: #eee;
+    border: 1px solid #D5D1D1;
+    border-radius: 5px;
+}
 
 .add-new-user-content-wrapper {
     display: none;
